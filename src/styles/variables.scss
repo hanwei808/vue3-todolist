@@ -1,0 +1,7 @@
+$primary-color: #40586F;
+
+$--color-primary: teal;
+/* icon font path, required */
+$--font-path: '~element3/lib/theme-chalk/fonts';
+
+@import "~element3/packages/theme-chalk/src/index";
