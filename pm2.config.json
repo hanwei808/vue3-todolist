@@ -1,0 +1,9 @@
+{
+    "apps":[
+        {
+            "name": "vue3-todolist",
+            "script": "npm",
+            "args": "serve"
+        }
+    ]
+}
