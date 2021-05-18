@@ -68,9 +68,8 @@
       <a href="http://sindresorhus.com">Sindre Sorhus</a>
     </p>
     <!-- Change this out with your name and url ↓ -->
-    <p>Created by hanwei</p>
+    <p>Created by <a href="https://github.com/hanwei808/vue3-todolist">hanwei github</a></p>
     <p>Vue.js 3.0 Composition APIs && TypeScript</p>
-    <p><a href="https://github.com/hanwei808/vue3-todolist">GitHub</a></p>
   </footer>
 </template>
 
