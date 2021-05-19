@@ -20,7 +20,7 @@
           :key="todo"
           :class="{ editing: todo === editingTodo, completed: todo.completed }"
         >
-          <div class="view">
+          <div class="view" style="display:flex">
             <input class="toggle" type="checkbox" v-model="todo.completed" />
             <label @dblclick="editTodo(todo)">{{ todo.text }}</label>
             <button class="destroy" @click="remove(todo)"></button>
@@ -44,13 +44,13 @@
       </span>
       <ul class="filters">
         <li>
-          <a href="#/all">All</a>
+          <button @click="onHashChange('all')">All</button>
         </li>
         <li>
-          <a href="#/active">Active</a>
+          <button @click="onHashChange('active')">Active</button>
         </li>
         <li>
-          <a href="#/completed">Completed</a>
+          <button @click="onHashChange('completed')">Completed</button>
         </li>
       </ul>
       <button
@@ -159,34 +159,24 @@ const useFilter = (todos) => {
     completed: (list) => list.filter((todo) => todo.completed)
   }
   const type = ref('all')
-  const filteredTodos = computed(() => filter[type.value](todos.value))
+  let filteredTodos = computed(() => filter[type.value](todos.value))
   const remainingCount = computed(() => filter.active(todos.value).length)
   const count = computed(() => todos.value.length)
 
-  const onHashChange = () => {
-    const hash = window.location.hash.replace('#/', '')
-    if (filter[hash]) {
-      type.value = hash
-    } else {
-      type.value = 'all'
-      window.location.hash = ''
-    }
+  const onHashChange = (hash) => {
+    console.log(hash)
+    type.value = filter[hash] ? hash : 'all'
+    watchEffect(() => {
+      filteredTodos = filter[type.value](todos.value)
+    })
   }
-
-  onMounted(() => {
-    window.addEventListener('hashchange', onHashChange)
-    onHashChange()
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('hashchange', onHashChange)
-  })
 
   return {
     allDone,
     count,
     filteredTodos,
-    remainingCount
+    remainingCount,
+    onHashChange
   }
 }
 
